@@ -1,6 +1,6 @@
 [build]
   base = "frontend/"
-  command = "npm install && ls -l node_modules/.bin/tailwindcss && which tailwindcss && npm run build"
+  command = "npm install --include=dev && npm run build"
   publish = "dist"
 
 [[redirects]]
