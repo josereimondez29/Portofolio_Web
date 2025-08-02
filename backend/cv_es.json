@@ -1,0 +1,113 @@
+
+{
+  "name": "JOSÉ REIMONDEZ",
+  "title": "Desarrollador Python & Científico de Datos",
+  "contact": {
+    "phone": "+34 624 604 647",
+    "email": "josereimondez29@gmail.com",
+    "linkedin": "https://linkedin.com/in/josereimondez",
+    "github": "https://github.com/josereimondez29",
+    "credly": "https://www.credly.com/users/jose-reimondez",
+    "portfolio": "https://josereimondez.com",
+    "location": "Madrid, España"
+  },
+  "profile": "Desarrollador Python con amplia experiencia en desarrollo de software, automatización de procesos y análisis de datos. Experto en frameworks como Flask, Django y FastAPI para la creación de APIs RESTful, así como en herramientas de ciencia de datos como Pandas, NumPy, Pyspark, Kafka y bibliotecas de aprendizaje automático. Gran conocimiento en contenedores, CI/CD y despliegue en la nube. Experiencia en desarrollo backend y full stack, con un enfoque orientado a resultados y optimización de sistemas mediante automatización y soluciones basadas en datos. Excelentes habilidades de liderazgo y comunicación.",
+  "skills": {
+    "Lenguajes y Frameworks": "Python, FastAPI, Flask, Django, SQL, NumPy, Pandas, TensorFlow, PyTorch, PySpark, Kafka, ETL",
+    "Bases de Datos": "PostgreSQL, MySQL, MongoDB, Redis",
+    "Herramientas y Tecnologías": "Docker, Kubernetes, Jenkins, SonarQube, Selenium, BeautifulSoup, Pytest, Git, GitHub, GitLab",
+    "Cloud": "AWS (Lambda, CloudWatch, AppRunner, X-Ray), GCP, Azure, Google Cloud",
+    "Frontend": "HTML, CSS, JavaScript, React",
+    "Metodologías": "Agile, Scrum",
+    "Gestión de Entornos": "Pip, Poetry",
+    "Buenas Prácticas": "Clean Code, Patrones de Diseño, Testing Automatizado"
+  },
+  "experience": [
+    {
+      "company": "Ricoh España",
+      "role": "Desarrollador Python / Backend Senior",
+      "location": "Madrid, España",
+      "date": "Febrero 2022 – Presente",
+      "description": [
+        "Lidero el desarrollo de microservicios RESTful altamente escalables con FastAPI, integrados en entornos corporativos críticos para control de salas AV.",
+        "Más de 2 años trabajando con APIs en producción, con enfoque en diseño limpio, modularidad y reutilización de componentes.",
+        "Gestión y despliegue de servicios en la nube mediante AWS (Lambda, AppRunner), y colaboración en integraciones híbridas AWS-GCP.",
+        "Integración de dispositivos físicos mediante programación de protocolos (RS-232, TCP/IP, IR), aportando una visión de control completo hardware/software.",
+        "Coordinación con equipos IT y AV para la automatización de salas de reuniones, integrando soluciones mediante Cisco Control Hub."
+      ]
+    },
+    {
+      "company": "Telefónica España",
+      "role": "Desarrollador Python (Cloud & Data)",
+      "location": "Madrid, España",
+      "date": "Octubre 2021 – Febrero 2022",
+      "description": [
+        "Desarrollé microservicios backend utilizando Flask, integrando servicios externos con autenticación segura y despliegue en producción.",
+        "Automatización de procesamiento de grandes volúmenes de datos con Python y Pandas.",
+        "Participé en pipelines CI/CD usando Jenkins, Git y Pytest, asegurando calidad y entregas continuas.",
+        "Trabajo en entornos híbridos de AWS y GCP, incluyendo configuración de entornos, testing, y despliegue de APIs en ambas plataformas."
+      ]
+    },
+    {
+      "company": "Intelidat",
+      "role": "Backend Developer (Python, FastAPI, AWS)",
+      "location": "Remoto",
+      "date": "Octubre 2020 – Septiembre 2021",
+      "description": [
+        "Diseño y desarrollo de microservicios backend en FastAPI, con arquitecturas desacopladas y escalables, gestionadas vía contenedores Docker.",
+        "Conexión con bases de datos utilizando SQLAlchemy, mejorando eficiencia de acceso y mantenimiento del sistema.",
+        "Despliegues automatizados en AWS (Lambda, AppRunner), e integración continua con Jenkins y GitLab CI.",
+        "Monitorización de servicios en producción usando Prometheus y Splunk para garantizar rendimiento en tiempo real."
+      ]
+    },
+    {
+      "company": "Innova Service",
+      "role": "Desarrollador Python / Científico de Datos",
+      "location": "Panamá",
+      "date": "Marzo 2017 – Mayo 2019",
+      "description": [
+        "Lideré el diseño, arquitectura y desarrollo de sistemas backend complejos para soluciones LegalTech y HealthTech, utilizando Python y Flask bajo un enfoque de microservicios modulares, desacoplados y escalables.",
+        "Participé activamente en la definición técnica de productos, desde la recogida de requisitos hasta la entrega, aplicando principios de diseño limpio y buenas prácticas de ingeniería.",
+        "Implementé modelos de Machine Learning supervisados, junto con técnicas de procesamiento de lenguaje natural (NLP) para la detección de fraude legal, predicción de resultados judiciales y generación de informes automáticos.",
+        "Desarrollé e integré chatbots inteligentes para la atención legal automática, entrenados con corpus específicos y conectados a sistemas internos.",
+        "Diseñé pipelines de procesamiento de datos en tiempo real con Kafka, generando alertas clínicas instantáneas a partir de signos vitales recogidos por sensores médicos.",
+        "Automatización de procesos de facturación médica, clasificación de documentos y análisis de datos clínicos para mejorar la toma de decisiones y reducir errores humanos.",
+        "Uso extensivo de Docker para contenerización, orquestación de servicios, pruebas automatizadas y despliegue en entornos controlados.",
+        "Colaboración directa con médicos, abogados y stakeholders clave para traducir necesidades del negocio en soluciones tecnológicas efectivas."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "4Geeks Academy",
+      "title": "Desarrollador Full Stack",
+      "date": "2023 - 2024",
+      "location": "Madrid, España"
+    },
+    {
+      "institution": "Universidad Latina de Panamá",
+      "title": "Ingeniería en Sistemas",
+      "date": "2000 - 2004",
+      "location": "Panamá"
+    }
+  ],
+  "languages": [
+    {
+      "language": "Español",
+      "level": "Nativo"
+    },
+    {
+      "language": "Inglés",
+      "level": "Avanzado"
+    }
+  ],
+  "certifications": [
+    "IBM Data Science Professional Certificate",
+    "PCAP: Associate Python Programmer - Cisco Networking Academy",
+    "Data Analyst - Google / Coursera",
+    "Crash Course on Python - Google / Coursera",
+    "Arquitectura Big Data - Grupo Colón IECM",
+    "Firma Electrónica y Seguridad en Internet - Grupo Colón IECM",
+    "Gestión de Seguridad Informática - Grupo ATU"
+  ]
+}

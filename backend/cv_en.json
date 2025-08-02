@@ -1,0 +1,112 @@
+{
+  "name": "JOSÉ REIMONDEZ",
+  "title": "Python Developer & Data Scientist",
+  "contact": {
+    "phone": "+34 624 604 647",
+    "email": "josereimondez29@gmail.com",
+    "linkedin": "https://linkedin.com/in/josereimondez",
+    "github": "https://github.com/josereimondez29",
+    "credly": "https://www.credly.com/users/jose-reimondez",
+    "portfolio": "https://josereimondez.com",
+    "location": "Madrid, Spain"
+  },
+  "profile": "Python Developer with extensive experience in software development, process automation, and data analysis. Expert in frameworks such as Flask, Django, and FastAPI for building RESTful APIs, as well as data science tools like Pandas, NumPy, PySpark, Kafka, and machine learning libraries. Strong knowledge of containerization, CI/CD, and cloud deployment. Background in backend and full stack development, with a results-driven mindset and system optimization through automation and data-based solutions. Excellent leadership and communication skills.",
+  "skills": {
+    "Languages and Frameworks": "Python, FastAPI, Flask, Django, SQL, NumPy, Pandas, TensorFlow, PyTorch, PySpark, Kafka, ETL",
+    "Databases": "PostgreSQL, MySQL, MongoDB, Redis",
+    "Tools and Technologies": "Docker, Kubernetes, Jenkins, SonarQube, Selenium, BeautifulSoup, Pytest, Git, GitHub, GitLab",
+    "Cloud": "AWS (Lambda, CloudWatch, AppRunner, X-Ray), GCP, Azure, Google Cloud",
+    "Frontend": "HTML, CSS, JavaScript, React",
+    "Methodologies": "Agile, Scrum",
+    "Environment Management": "Pip, Poetry",
+    "Best Practices": "Clean Code, Design Patterns, Automated Testing"
+  },
+  "experience": [
+    {
+      "company": "Ricoh España",
+      "role": "Senior Python / Backend Developer",
+      "location": "Madrid, Spain",
+      "date": "February 2022 – Present",
+      "description": [
+        "Lead development of highly scalable RESTful microservices with FastAPI, integrated in critical corporate environments for AV room control.",
+        "Over 2 years working with production APIs, focused on clean design, modularity, and component reuse.",
+        "Cloud deployment and service management using AWS (Lambda, AppRunner) and hybrid AWS-GCP integrations.",
+        "Integration of physical devices through protocol programming (RS-232, TCP/IP, IR), providing a full hardware/software control perspective.",
+        "Coordination with IT and AV teams for meeting room automation, integrating solutions via Cisco Control Hub."
+      ]
+    },
+    {
+      "company": "Telefónica España",
+      "role": "Python Developer (Cloud & Data)",
+      "location": "Madrid, Spain",
+      "date": "October 2021 – February 2022",
+      "description": [
+        "Developed backend microservices using Flask, integrating external services with secure authentication and production deployment.",
+        "Automated large-scale data processing using Python and Pandas.",
+        "Participated in CI/CD pipelines with Jenkins, Git, and Pytest, ensuring quality and continuous delivery.",
+        "Worked in hybrid AWS and GCP environments, including environment configuration, testing, and deployment of APIs across both platforms."
+      ]
+    },
+    {
+      "company": "Intelidat",
+      "role": "Backend Developer (Python, FastAPI, AWS)",
+      "location": "Remote",
+      "date": "October 2020 – September 2021",
+      "description": [
+        "Designed and developed backend microservices in FastAPI, with decoupled and scalable architectures managed through Docker containers.",
+        "Connected databases using SQLAlchemy, improving access efficiency and system maintainability.",
+        "Automated deployments on AWS (Lambda, AppRunner), and implemented CI with Jenkins and GitLab CI.",
+        "Monitored production services using Prometheus and Splunk to ensure real-time performance."
+      ]
+    },
+    {
+      "company": "Innova Service",
+      "role": "Python Developer / Data Scientist",
+      "location": "Panama",
+      "date": "March 2017 – May 2019",
+      "description": [
+        "Led the design, architecture, and development of complex backend systems for LegalTech and HealthTech solutions, using Python and Flask with modular, decoupled, and scalable microservices.",
+        "Actively participated in the technical definition of products, from requirements gathering to delivery, applying clean design principles and engineering best practices.",
+        "Implemented supervised Machine Learning models and NLP techniques for fraud detection, court outcome prediction, and automatic report generation.",
+        "Developed and integrated intelligent legal chatbots, trained with specific corpora and connected to internal systems.",
+        "Designed real-time data processing pipelines with Kafka, generating instant clinical alerts from medical sensor inputs.",
+        "Automated processes for medical billing, document classification, and clinical data analysis to support decision-making and reduce human error.",
+        "Extensive use of Docker for containerization, service orchestration, automated testing, and deployment in controlled environments.",
+        "Direct collaboration with doctors, lawyers, and key stakeholders to translate business needs into effective technical solutions."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "4Geeks Academy",
+      "title": "Full Stack Developer",
+      "date": "2023 - 2024",
+      "location": "Madrid, Spain"
+    },
+    {
+      "institution": "Universidad Latina de Panamá",
+      "title": "Systems Engineering",
+      "date": "2000 - 2004",
+      "location": "Panama"
+    }
+  ],
+  "languages": [
+    {
+      "language": "Spanish",
+      "level": "Native"
+    },
+    {
+      "language": "English",
+      "level": "Advanced"
+    }
+  ],
+  "certifications": [
+    "IBM Data Science Professional Certificate",
+    "PCAP: Associate Python Programmer - Cisco Networking Academy",
+    "Data Analyst - Google / Coursera",
+    "Crash Course on Python - Google / Coursera",
+    "Big Data Architecture - Grupo Colón IECM",
+    "Electronic Signature and Internet Security - Grupo Colón IECM",
+    "IT Security Management - Grupo ATU"
+  ]
+}
