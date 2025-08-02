@@ -14,6 +14,29 @@ function App() {
     return <div>Loading...</div>;
   }
 
+  const handleContactSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const contactData = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+    };
+
+    fetch('http://localhost:8000/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(contactData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert(data.message);
+      event.target.reset();
+    });
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen p-8">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
@@ -83,6 +106,25 @@ function App() {
               <li key={index}>{cert}</li>
             ))}
           </ul>
+        </section>
+
+        <section className="mt-8">
+          <h3 className="text-2xl font-bold border-b-2 border-gray-200 pb-2 mb-4">{language === 'es' ? 'Contacto' : 'Contact'}</h3>
+          <form onSubmit={handleContactSubmit}>
+            <div className="mb-4">
+              <label htmlFor="name" className="block text-gray-700 font-bold mb-2">{language === 'es' ? 'Nombre' : 'Name'}</label>
+              <input type="text" id="name" name="name" className="w-full px-3 py-2 border rounded-lg" required />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email</label>
+              <input type="email" id="email" name="email" className="w-full px-3 py-2 border rounded-lg" required />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="message" className="block text-gray-700 font-bold mb-2">{language === 'es' ? 'Mensaje' : 'Message'}</label>
+              <textarea id="message" name="message" rows="4" className="w-full px-3 py-2 border rounded-lg" required></textarea>
+            </div>
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg">{language === 'es' ? 'Enviar' : 'Send'}</button>
+          </form>
         </section>
 
       </div>

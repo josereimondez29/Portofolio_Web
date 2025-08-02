@@ -1,6 +1,7 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import json
 
 app = FastAPI()
@@ -14,6 +15,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class ContactRequest(BaseModel):
+    name: str
+    email: str
+    message: str
+
 @app.get("/api/es")
 def get_cv_es():
     with open('/Users/josereimondez/Documents/New Portofolio/Portofolio web final/backend/cv_es.json', 'r', encoding='utf-8') as f:
@@ -23,3 +29,8 @@ def get_cv_es():
 def get_cv_en():
     with open('/Users/josereimondez/Documents/New Portofolio/Portofolio web final/backend/cv_en.json', 'r', encoding='utf-8') as f:
         return json.load(f)
+
+@app.post("/api/contact")
+def contact(request: ContactRequest):
+    print(f"Nuevo mensaje de: {request.name} <{request.email}>\n{request.message}")
+    return {"message": "¡Mensaje recibido! Gracias por contactarme."}
