@@ -1,8 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
+
+interface CVData {
+  name: string;
+  title: string;
+  profile: string;
+  skills: Record<string, string>;
+  experience: {
+    role: string;
+    company: string;
+    location: string;
+    date: string;
+    description: string[];
+  }[];
+  education: {
+    title: string;
+    institution: string;
+    location: string;
+    date: string;
+  }[];
+  languages: {
+    language: string;
+    level: string;
+  }[];
+  certifications: string[];
+}
 
 function App() {
   const [language, setLanguage] = useState('es');
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<CVData | null>(null);
 
   useEffect(() => {
     fetch(`http://localhost:8000/api/${language}`)
@@ -14,13 +39,13 @@ function App() {
     return <div>Loading...</div>;
   }
 
-  const handleContactSubmit = (event) => {
+  const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.currentTarget);
     const contactData = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message'),
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      message: formData.get('message') as string,
     };
 
     fetch('http://localhost:8000/api/contact', {
@@ -33,7 +58,7 @@ function App() {
     .then(response => response.json())
     .then(data => {
       alert(data.message);
-      event.target.reset();
+      (event.target as HTMLFormElement).reset();
     });
   };
 
@@ -121,7 +146,7 @@ function App() {
             </div>
             <div className="mb-4">
               <label htmlFor="message" className="block text-gray-700 font-bold mb-2">{language === 'es' ? 'Mensaje' : 'Message'}</label>
-              <textarea id="message" name="message" rows="4" className="w-full px-3 py-2 border rounded-lg" required></textarea>
+              <textarea id="message" name="message" rows={4} className="w-full px-3 py-2 border rounded-lg" required></textarea>
             </div>
             <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg">{language === 'es' ? 'Enviar' : 'Send'}</button>
           </form>
