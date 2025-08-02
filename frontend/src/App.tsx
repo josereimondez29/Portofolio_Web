@@ -1,5 +1,6 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
-import { FaGithub, FaLinkedin, FaCredly } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { SiCredly } from 'react-icons/si';
 
 // Lazy load components
 const Profile = lazy(() => import('./Profile'));
@@ -72,7 +73,7 @@ function App() {
               <FaGithub size={24} />
             </a>
             <a href={data.contact.credly} target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors duration-300">
-              <FaCredly size={24} />
+              <SiCredly size={24} />
             </a>
           </div>
           <div>

@@ -1,5 +1,5 @@
-import { type FormEvent } from 'react';
-import { FaGithub, FaLinkedin, FaCredly } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { SiCredly } from 'react-icons/si';
 
 interface CVData {
   name: string;
@@ -54,7 +54,7 @@ function Profile({ data, language }: ProfileProps) {
             <FaGithub size={30} />
           </a>
           <a href={data.contact.credly} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-purple-700 transition-colors duration-300">
-            <FaCredly size={30} />
+            <SiCredly size={30} />
           </a>
         </div>
         <p className="text-lg text-gray-700">{data.contact.email} | {data.contact.phone} | {data.contact.location}</p>
