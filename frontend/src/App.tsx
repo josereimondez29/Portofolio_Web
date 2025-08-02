@@ -30,7 +30,7 @@ function App() {
   const [data, setData] = useState<CVData | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/${language}`)
+    fetch(`https://josereimondez-portfolio-backend.onrender.com/api/${language}`)
       .then(response => response.json())
       .then(data => setData(data));
   }, [language]);
@@ -48,7 +48,7 @@ function App() {
       message: formData.get('message') as string,
     };
 
-    fetch('http://localhost:8000/api/contact', {
+    fetch('https://josereimondez-portfolio-backend.onrender.com/api/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

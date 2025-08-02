@@ -5,5 +5,5 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "http://localhost:8000/api/:splat"
+  to = "https://josereimondez-portfolio-backend.onrender.com/api/:splat"
   status = 200
