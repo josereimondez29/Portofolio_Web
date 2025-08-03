@@ -42,12 +42,23 @@ interface ProfileProps {
 
 function Profile({ data, language }: ProfileProps) {
   return (
-    <div className="space-y-8">
-      <header className="text-center mb-10">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-3 leading-tight">{data.name}</h1>
-        <h2 className="text-2xl md:text-3xl text-blue-700 font-semibold mb-5">{data.title}</h2>
-        <div className="flex justify-center space-x-6 mb-4">
-          <a href={data.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-700 transition-colors duration-300 transform hover:scale-110">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <header className="relative rounded-3xl bg-white shadow-xl overflow-hidden mb-16">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-10"></div>
+          <div className="relative z-10 px-6 py-12 sm:px-12 sm:py-20">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-4 leading-tight tracking-tight text-center">
+              {data.name}
+            </h1>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-700 font-semibold mb-8 tracking-wide text-center">
+              {data.title}
+            </h2>
+            <div className="flex justify-center space-x-6 mb-8">
+              <a
+                href={data.contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 transition-all duration-300 transform hover:scale-110 flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md hover:shadow-lg"
             <FaLinkedin size={32} />
           </a>
           <a href={data.contact.github} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors duration-300 transform hover:scale-110">
