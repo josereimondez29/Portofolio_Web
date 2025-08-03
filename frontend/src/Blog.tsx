@@ -1,25 +1,47 @@
 import React from 'react';
-import type { BlogPost } from './types/BlogTypes';
+import { request, gql } from 'graphql-request';
+import type { Post, HashnodeResponse } from './types/BlogTypes';
 
 interface BlogProps {
   language: string;
 }
 
+const GET_USER_ARTICLES = gql`
+  query GetUserArticles {
+    user(username: "josereimondez") {
+      publication {
+        posts(first: 10) {
+          nodes {
+            _id
+            title
+            brief
+            slug
+            publishedAt
+            coverImage {
+              url
+            }
+            readTimeInMinutes
+          }
+        }
+      }
+    }
+  }
+`;
+
 function Blog({ language }: BlogProps) {
-  const [posts, setPosts] = React.useState<BlogPost[]>([]);
+  const [posts, setPosts] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`https://josereimondez-portfolio-backend.onrender.com/api/blog/posts?lang=${language}`);
-        if (!response.ok) {
-          throw new Error('Error fetching blog posts');
-        }
-        const data = await response.json();
-        setPosts(data);
-      } catch (err) {
+        const data = await request<HashnodeResponse>(
+          'https://gql.hashnode.com',
+          GET_USER_ARTICLES
+        );
+        setPosts(data.user.publication.posts.nodes);
+      } catch (error) {
         setError(language === 'es' ? 
           'Error al cargar los posts. Por favor, intenta de nuevo más tarde.' : 
           'Error loading posts. Please try again later.');
@@ -73,13 +95,13 @@ function Blog({ language }: BlogProps) {
               <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {posts.map((post) => (
                   <article 
-                    key={post.id}
+                    key={post._id}
                     className="bg-gray-50 rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300"
                   >
-                    {post.image && (
+                    {post.coverImage?.url && (
                       <div className="aspect-video w-full overflow-hidden">
                         <img 
-                          src={post.image} 
+                          src={post.coverImage.url} 
                           alt={post.title}
                           className="w-full h-full object-cover"
                         />
@@ -90,21 +112,22 @@ function Blog({ language }: BlogProps) {
                         {post.title}
                       </h2>
                       <p className="text-gray-600 mb-4 line-clamp-3">
-                        {post.summary}
+                        {post.brief}
                       </p>
                       <div className="flex items-center justify-between text-sm text-gray-500">
-                        <span>{post.date}</span>
-                        <span>{post.readTime} min read</span>
-                      </div>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {post.tags.map((tag) => (
-                          <span 
-                            key={tag}
-                            className="px-2 py-1 bg-navy-100 text-navy-600 rounded-full text-sm"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                        <div>
+                          <span>{new Date(post.publishedAt).toLocaleDateString(language === 'es' ? 'es-ES' : 'en-US')}</span>
+                          <span className="mx-2">·</span>
+                          <span>{post.readTimeInMinutes} {language === 'es' ? 'min de lectura' : 'min read'}</span>
+                        </div>
+                        <a
+                          href={`https://hashnode.com/@josereimondez/${post.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-navy-600 hover:text-navy-800"
+                        >
+                          {language === 'es' ? 'Leer más →' : 'Read more →'}
+                        </a>
                       </div>
                     </div>
                   </article>

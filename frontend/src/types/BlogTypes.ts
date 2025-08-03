@@ -1,10 +1,21 @@
-export interface BlogPost {
-  id: string;
+export interface Post {
+  _id: string;
   title: string;
-  content: string;
-  summary: string;
-  date: string;
-  image?: string;
-  tags: string[];
-  readTime: number;
+  brief: string;
+  slug: string;
+  publishedAt: string;
+  coverImage: {
+    url: string;
+  };
+  readTimeInMinutes: number;
+}
+
+export interface HashnodeResponse {
+  user: {
+    publication: {
+      posts: {
+        nodes: Post[];
+      };
+    };
+  };
 }
