@@ -1,45 +1,12 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { SiCredly } from 'react-icons/si';
+import type { CVData } from './types/CVData';
 
 // Lazy load components
 const Profile = lazy(() => import('./Profile'));
 const Projects = lazy(() => import('./Projects'));
 const Contact = lazy(() => import('./Contact'));
-
-interface CVData {
-  name: string;
-  title: string;
-  contact: {
-    phone: string;
-    email: string;
-    linkedin: string;
-    github: string;
-    credly: string;
-    portfolio: string;
-    location: string;
-  };
-  profile: string;
-  skills: Record<string, string>;
-  experience: {
-    role: string;
-    company: string;
-    location: string;
-    date: string;
-    description: string[];
-  }[];
-  education: {
-    title: string;
-    institution: string;
-    location: string;
-    date: string;
-  }[];
-  languages: {
-    language: string;
-    level: string;
-  }[];
-  certifications: string[];
-}
 
 function App() {
   const [language, setLanguage] = useState('es');
@@ -153,8 +120,8 @@ function App() {
               onClick={() => setActiveTab(tab)}
               className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
                 activeTab === tab
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                  ? 'bg-navy-800 text-white shadow-lg'
+                  : 'text-gray-600 hover:text-navy-700 hover:bg-navy-50'
               }`}
             >
               {language === 'es'
@@ -175,14 +142,14 @@ function App() {
           fallback={
             <div className="flex items-center justify-center min-h-[60vh]">
               <div className="animate-pulse flex flex-col items-center">
-                <div className="h-32 w-32 bg-blue-200 rounded-full mb-4"></div>
-                <div className="h-4 w-48 bg-blue-200 rounded mb-2"></div>
-                <div className="h-4 w-32 bg-blue-200 rounded"></div>
+                <div className="h-32 w-32 bg-navy-200 rounded-full mb-4"></div>
+                <div className="h-4 w-48 bg-navy-200 rounded mb-2"></div>
+                <div className="h-4 w-32 bg-navy-200 rounded"></div>
               </div>
             </div>
           }
         >
-          {activeTab === 'profile' && <Profile data={data} language={language} />}
+          {activeTab === 'profile' && data && <Profile data={data} language={language} />}
           {activeTab === 'projects' && <Projects language={language} />}
           {activeTab === 'contact' && <Contact language={language} />}
         </Suspense>

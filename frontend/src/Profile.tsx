@@ -1,7 +1,8 @@
 import React from 'react';
 import profileImage from './assets/images/foto perfil.jpg';
+import type { CVData } from './types/CVData';
 
-interface CVData {
+interface ProfileProps {
   name: string;
   title: string;
   contact: {
