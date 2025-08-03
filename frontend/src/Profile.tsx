@@ -45,45 +45,38 @@ function Profile({ data, language }: ProfileProps) {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <header className="relative rounded-3xl bg-white shadow-xl overflow-hidden mb-16">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-10"></div>
-          <div className="relative z-10 px-6 py-12 sm:px-12 sm:py-20">
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-4 leading-tight tracking-tight text-center">
-              {data.name}
-            </h1>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-700 font-semibold mb-8 tracking-wide text-center">
-              {data.title}
-            </h2>
-            <div className="flex justify-center space-x-6 mb-8">
-              <a
-                href={data.contact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 transition-all duration-300 transform hover:scale-110 flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md hover:shadow-lg"
-              >
-                <FaLinkedin className="w-8 h-8" />
-              </a>
-              <a
-                href={data.contact.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-gray-900 transition-colors duration-300 transform hover:scale-110 flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md hover:shadow-lg"
-              >
-                <FaGithub className="w-8 h-8" />
-              </a>
-              <a
-                href={data.contact.credly}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-purple-700 transition-colors duration-300 transform hover:scale-110 flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md hover:shadow-lg"
-              >
-                <SiCredly className="w-8 h-8" />
-              </a>
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-800 to-navy-900 opacity-10"></div>
+          <div className="relative z-10 px-6 py-8 sm:px-12 sm:py-12">
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+                {/* Aquí irá tu foto */}
+                <div className="w-full h-full bg-navy-100 flex items-center justify-center text-navy-500">
+                  <span className="text-sm">Foto del perfil</span>
+                </div>
+              </div>
+              <div className="flex-1 text-left">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-navy-900 mb-3 leading-tight">
+                  {data.name}
+                </h1>
+                <h2 className="text-lg sm:text-xl lg:text-2xl text-navy-700 font-medium mb-4">
+                  {data.title}
+                </h2>
+                <div className="space-y-2">
+                  <p className="flex items-center gap-2 text-gray-700">
+                    <span className="w-5 text-navy-600">📧</span>
+                    {data.contact.email}
+                  </p>
+                  <p className="flex items-center gap-2 text-gray-700">
+                    <span className="w-5 text-navy-600">📱</span>
+                    {data.contact.phone}
+                  </p>
+                  <p className="flex items-center gap-2 text-gray-700">
+                    <span className="w-5 text-navy-600">📍</span>
+                    {data.contact.location}
+                  </p>
+                </div>
+              </div>
             </div>
-            <p className="text-lg md:text-xl text-gray-700 font-medium">
-              <span className="block">{data.contact.email}</span>
-              <span className="block">{data.contact.phone}</span>
-              <span className="block">{data.contact.location}</span>
-            </p>
           </div>
         </header>
 

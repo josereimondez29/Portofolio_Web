@@ -54,8 +54,17 @@ function App() {
 
   if (!data) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="text-2xl font-semibold text-gray-700">Cargando...</div>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-navy-50 to-navy-100">
+        <div className="w-24 h-24 mb-8 relative">
+          <div className="absolute inset-0 border-4 border-navy-200 rounded-full"></div>
+          <div className="absolute inset-0 border-4 border-navy-600 rounded-full animate-spin border-t-transparent"></div>
+        </div>
+        <div className="text-2xl font-semibold text-navy-800">
+          Cargando tu portfolio...
+        </div>
+        <div className="mt-4 text-navy-600 animate-pulse">
+          Por favor, espera un momento
+        </div>
       </div>
     );
   }
