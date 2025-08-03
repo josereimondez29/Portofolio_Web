@@ -6,6 +6,7 @@ import type { CVData } from './types/CVData';
 // Lazy load components
 const Profile = lazy(() => import('./Profile'));
 const Projects = lazy(() => import('./Projects'));
+const Blog = lazy(() => import('./Blog'));
 const Contact = lazy(() => import('./Contact'));
 
 function App() {
@@ -99,7 +100,7 @@ function App() {
 
             {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              {['profile', 'projects', 'contact'].map((tab) => (
+              {['profile', 'projects', 'blog', 'contact'].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
@@ -114,6 +115,8 @@ function App() {
                       ? 'Perfil'
                       : tab === 'projects'
                       ? 'Proyectos'
+                      : tab === 'blog'
+                      ? 'Blog'
                       : 'Contacto'
                     : tab.charAt(0).toUpperCase() + tab.slice(1)}
                 </button>
@@ -145,7 +148,7 @@ function App() {
       {/* Mobile Navigation */}
       <nav className="md:hidden sticky top-16 z-40 bg-white/80 backdrop-blur-lg border-b border-gray-200 px-4 py-3">
         <div className="flex justify-between space-x-2">
-          {['profile', 'projects', 'contact'].map((tab) => (
+          {['profile', 'projects', 'blog', 'contact'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -182,6 +185,7 @@ function App() {
         >
           {activeTab === 'profile' && data && <Profile data={data} language={language} />}
           {activeTab === 'projects' && <Projects language={language} />}
+          {activeTab === 'blog' && <Blog language={language} />}
           {activeTab === 'contact' && <Contact language={language} />}
         </Suspense>
       </main>
