@@ -14,9 +14,40 @@ function App() {
   const [activeTab, setActiveTab] = useState('profile');
 
   useEffect(() => {
-    fetch(`https://josereimondez-portfolio-backend.onrender.com/api/${language}`)
-      .then(response => response.json())
-      .then(data => setData(data));
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://josereimondez-portfolio-backend.onrender.com/api/${language}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Si hay un error, podemos establecer un estado de datos mínimo para que la app no se quede cargando
+        setData({
+          name: "José Reimondez",
+          title: language === 'es' ? "Desarrollador Full Stack" : "Full Stack Developer",
+          contact: {
+            phone: "",
+            email: "",
+            linkedin: "https://www.linkedin.com/",
+            github: "https://github.com/",
+            credly: "",
+            portfolio: "",
+            location: ""
+          },
+          profile: "",
+          skills: {},
+          experience: [],
+          education: [],
+          languages: [],
+          certifications: []
+        });
+      }
+    };
+
+    fetchData();
   }, [language]);
 
   if (!data) {
