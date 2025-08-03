@@ -3,6 +3,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
+from dotenv import load_dotenv
+from github_projects import get_pinned_repos
+
+load_dotenv()  # Cargar variables de entorno desde .env
 
 app = FastAPI()
 
@@ -34,3 +38,8 @@ def get_cv_en():
 def contact(request: ContactRequest):
     print(f"Nuevo mensaje de: {request.name} <{request.email}>\n{request.message}")
     return {"message": "¡Mensaje recibido! Gracias por contactarme."}
+
+@app.get("/api/github/pinned-projects")
+def get_pinned_projects():
+    projects = get_pinned_repos("josereimondez29")
+    return projects
