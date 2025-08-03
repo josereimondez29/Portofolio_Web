@@ -3,46 +3,6 @@ import profileImage from './assets/images/foto perfil.jpg';
 import type { CVData } from './types/CVData';
 
 interface ProfileProps {
-  name: string;
-  title: string;
-  contact: {
-    phone: string;
-    email: string;
-    linkedin: string;
-    github: string;
-    credly: string;
-    portfolio: string;
-    location: string;
-  };
-  profile: string;
-  skills: Record<string, string>;
-  projects: {
-    name: string;
-    description: string;
-    image: string;
-    githubUrl: string;
-  }[];
-  experience: {
-    role: string;
-    company: string;
-    location: string;
-    date: string;
-    description: string[];
-  }[];
-  education: {
-    title: string;
-    institution: string;
-    location: string;
-    date: string;
-  }[];
-  languages: {
-    language: string;
-    level: string;
-  }[];
-  certifications: string[];
-}
-
-interface ProfileProps {
   data: CVData;
   language: string;
 }
