@@ -80,12 +80,12 @@ function Profile({ data, language }: ProfileProps) {
           </div>
         </header>
 
-        <section className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-3xl font-bold text-gray-800 border-b-2 border-blue-500 pb-3 mb-5">{language === 'es' ? 'Perfil Profesional' : 'Professional Profile'}</h3>
+        <section className="bg-white p-8 rounded-lg shadow-md mb-8">
+          <h3 className="text-3xl font-bold text-navy-800 border-b-2 border-navy-500 pb-3 mb-6">{language === 'es' ? 'Perfil Profesional' : 'Professional Profile'}</h3>
           <p className="text-gray-700 leading-relaxed text-lg">{data.profile}</p>
         </section>
 
-        <section className="bg-white p-6 rounded-lg shadow-md">
+        <section className="bg-white p-8 rounded-lg shadow-md mb-8">
           <h3 className="text-3xl font-bold text-gray-800 border-b-2 border-blue-500 pb-3 mb-5">{language === 'es' ? 'Habilidades Técnicas' : 'Technical Skills'}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Object.entries(data.skills).map(([category, skills]) => (
