@@ -1,5 +1,5 @@
 import React from 'react';
-import profileImage from './assets/images/foto perfil.jpg';
+import profileImage from './assets/images/Foto de perfil new.jpg';
 import type { CVData } from './types/CVData';
 
 interface ProfileProps {
