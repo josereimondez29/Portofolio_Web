@@ -1,13 +1,24 @@
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 import json
+import os
 from dotenv import load_dotenv
 from github_projects import get_pinned_repos
 from blog_handler import load_blog_posts, save_blog_post, BlogPost
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 load_dotenv()  # Cargar variables de entorno desde .env
+
+# Configuración de email
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
+EMAIL_USER = os.getenv('EMAIL_USER')
+EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
+EMAIL_TO = os.getenv('EMAIL_TO')
 
 app = FastAPI()
 
@@ -22,7 +33,7 @@ app.add_middleware(
 
 class ContactRequest(BaseModel):
     name: str
-    email: str
+    email: EmailStr
     message: str
 
 @app.get("/api/es")
@@ -36,9 +47,75 @@ def get_cv_en():
         return json.load(f)
 
 @app.post("/api/contact")
-def contact(request: ContactRequest):
-    print(f"Nuevo mensaje de: {request.name} <{request.email}>\n{request.message}")
-    return {"message": "¡Mensaje recibido! Gracias por contactarme."}
+async def contact(request: ContactRequest):
+    try:
+        # Crear el mensaje
+        msg = MIMEMultipart()
+        msg['From'] = EMAIL_USER
+        msg['To'] = "dev@josereimondez.com"
+        msg['Subject'] = f"Nuevo mensaje de contacto de {request.name}"
+
+        # Construir el cuerpo del mensaje
+        body = f"""
+        Has recibido un nuevo mensaje de contacto:
+        
+        Nombre: {request.name}
+        Email: {request.email}
+        
+        Mensaje:
+        {request.message}
+        """
+        
+        msg.attach(MIMEText(body, 'plain'))
+
+        # Conectar al servidor SMTP y enviar el correo
+        with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
+            server.starttls()
+            server.login(EMAIL_USER, EMAIL_PASSWORD)
+            server.send_message(msg)
+
+        return {"message": "Mensaje enviado correctamente"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al enviar el mensaje: {str(e)}")
+    if not all([EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASSWORD, EMAIL_TO]):
+        raise HTTPException(status_code=500, detail="Email configuration is incomplete")
+    
+    try:
+        # Crear el mensaje
+        msg = MIMEMultipart()
+        msg['From'] = EMAIL_USER
+        msg['To'] = EMAIL_TO
+        msg['Subject'] = f"Nuevo mensaje de contacto de {request.name}"
+        
+        # Construir el cuerpo del mensaje
+        body = f"""
+        Has recibido un nuevo mensaje de contacto:
+        
+        Nombre: {request.name}
+        Email: {request.email}
+        
+        Mensaje:
+        {request.message}
+        """
+        
+        msg.attach(MIMEText(body, 'plain'))
+        
+        # Conectar al servidor SMTP y enviar el email
+        with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
+            server.starttls()
+            server.login(EMAIL_USER, EMAIL_PASSWORD)
+            server.send_message(msg)
+        
+        return {
+            "message": "¡Mensaje enviado con éxito! Gracias por contactarme.",
+            "status": "success"
+        }
+    except Exception as e:
+        print(f"Error al enviar el email: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail="No se pudo enviar el mensaje. Por favor, inténtalo de nuevo más tarde."
+        )
 
 @app.get("/api/github/pinned-projects")
 def get_pinned_projects():
