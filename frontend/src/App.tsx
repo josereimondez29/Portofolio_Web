@@ -163,6 +163,8 @@ function App() {
                   ? 'Perfil'
                   : tab === 'projects'
                   ? 'Proyectos'
+                  : tab === 'blog'
+                  ? 'Blog'
                   : 'Contacto'
                 : tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button>
