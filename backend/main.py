@@ -13,12 +13,12 @@ from email.mime.multipart import MIMEMultipart
 
 load_dotenv()  # Cargar variables de entorno desde .env
 
-# Configuración de email
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.ionos.es')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
-EMAIL_USER = os.getenv('EMAIL_USER')  # debe ser tu correo completo de IONOS
-EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
-EMAIL_TO = 'dev@josereimondez.com'
+# Configuración de email - Usando configuración oficial de IONOS
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.ionos.es')  # Servidor SMTP oficial de IONOS
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))       # Puerto TLS requerido
+EMAIL_USER = os.getenv('EMAIL_USER')                   # contactos@josereimondez.com
+EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')           # Contraseña del correo
+EMAIL_TO = 'dev@josereimondez.com'                    # Correo destino
 
 app = FastAPI()
 
@@ -84,10 +84,12 @@ async def contact(request: ContactRequest):
         print(f"Conectando al servidor SMTP {EMAIL_HOST}:{EMAIL_PORT}...")
         # Conectar al servidor SMTP y enviar el correo
         with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
+            server.set_debuglevel(1)  # Habilitar debug
             print("Iniciando TLS...")
             server.starttls()
-            print("Iniciando login...")
+            print(f"Intentando login con usuario: {EMAIL_USER}")
             server.login(EMAIL_USER, EMAIL_PASSWORD)
+            print("Login exitoso")
             print("Enviando mensaje...")
             server.send_message(msg)
             print("Mensaje enviado exitosamente")
