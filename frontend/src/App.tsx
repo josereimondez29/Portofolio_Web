@@ -13,42 +13,70 @@ const Post = lazy(() => import('./routes/Post'));
 function App() {
   const [language, setLanguage] = useState('es');
   const [data, setData] = useState<CVData | null>(null);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchData = async () => {
       try {
+        console.log('Iniciando fetch de datos...');
         const response = await fetch(`https://josereimondez-portfolio-backend.onrender.com/api/${language}`);
+        console.log('Respuesta recibida:', response.status);
+        
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
         const jsonData = await response.json();
-        setData(jsonData);
+        console.log('Datos recibidos:', jsonData);
+        
+        if (isMounted) {
+          setData(jsonData);
+          setIsError(false);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
-        setData({
-          name: "José Reimondez",
-          title: language === 'es' ? "Desarrollador Full Stack" : "Full Stack Developer",
-          contact: {
-            phone: "",
-            email: "",
-            linkedin: "https://www.linkedin.com/",
-            github: "https://github.com/",
-            credly: "",
-            portfolio: "",
-            location: ""
-          },
-          profile: "",
-          skills: {},
-          experience: [],
-          education: [],
-          languages: [],
-          certifications: []
-        });
+        if (isMounted) {
+          setIsError(true);
+          setData({
+            name: "José Reimondez",
+            title: language === 'es' ? "Desarrollador Full Stack" : "Full Stack Developer",
+            contact: {
+              phone: "",
+              email: "",
+              linkedin: "https://www.linkedin.com/",
+              github: "https://github.com/",
+              credly: "",
+              portfolio: "",
+              location: ""
+            },
+            profile: "",
+            skills: {},
+            experience: [],
+            education: [],
+            languages: [],
+            certifications: []
+          });
+        }
       }
     };
 
     fetchData();
-  }, [language]);
+    
+    // Configurar un intervalo para reintentar si hay error
+    let retryInterval: NodeJS.Timeout;
+    if (isError) {
+      retryInterval = setInterval(fetchData, 5000); // Reintentar cada 5 segundos
+    }
+
+    return () => {
+      isMounted = false;
+      if (retryInterval) {
+        clearInterval(retryInterval);
+      }
+    };
+  }, [language, isError]);
 
   if (!data) {
     return (
@@ -58,11 +86,17 @@ function App() {
           <div className="absolute inset-0 border-4 border-navy-600 rounded-full animate-spin border-t-transparent"></div>
         </div>
         <div className="text-2xl font-semibold text-navy-800">
-          {language === 'es' ? 'Cargando tu portafolio...' : 'Loading your portfolio...'}
+          {language === 'es' ? 'Cargando Portafolio...' : 'Loading Portfolio...'}
         </div>
-        <div className="mt-4 text-navy-600 animate-pulse">
-          {language === 'es' ? 'Por favor, espera un momento' : 'Please wait a moment'}
-        </div>
+        {isError ? (
+          <div className="mt-4 text-red-600">
+            {language === 'es' ? 'Error al cargar los datos. Reintentando...' : 'Error loading data. Retrying...'}
+          </div>
+        ) : (
+          <div className="mt-4 text-navy-600 animate-pulse">
+            {language === 'es' ? 'Por favor, espera un momento' : 'Please wait a moment'}
+          </div>
+        )}
       </div>
     );
   }
