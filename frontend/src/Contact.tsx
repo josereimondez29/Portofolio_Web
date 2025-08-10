@@ -5,7 +5,7 @@ interface ContactProps {
 }
 
 function Contact({ language }: ContactProps) {
-  const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const contactData = {
@@ -14,18 +14,27 @@ function Contact({ language }: ContactProps) {
       message: formData.get('message') as string,
     };
 
-    fetch('https://josereimondez-portfolio-backend.onrender.com/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(contactData),
-    })
-    .then(response => response.json())
-    .then(data => {
+    try {
+      const response = await fetch('https://josereimondez-portfolio-backend.onrender.com/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error en la respuesta del servidor');
+      }
+
+      const data = await response.json();
       alert(data.message);
       (event.target as HTMLFormElement).reset();
-    });
+    } catch (error) {
+      alert(language === 'es' 
+        ? 'Lo siento, ha ocurrido un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.' 
+        : 'Sorry, there was an error sending your message. Please try again later.');
+    }
   };
 
   return (

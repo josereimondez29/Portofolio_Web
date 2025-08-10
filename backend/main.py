@@ -48,6 +48,9 @@ def get_cv_en():
 
 @app.post("/api/contact")
 async def contact(request: ContactRequest):
+    if not all([EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASSWORD]):
+        raise HTTPException(status_code=500, detail="La configuración del email está incompleta")
+    
     try:
         # Crear el mensaje
         msg = MIMEMultipart()
@@ -74,29 +77,9 @@ async def contact(request: ContactRequest):
             server.login(EMAIL_USER, EMAIL_PASSWORD)
             server.send_message(msg)
 
-        return {"message": "Mensaje enviado correctamente"}
+        return {"message": "¡Mensaje enviado correctamente! Gracias por contactar."}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error al enviar el mensaje: {str(e)}")
-    if not all([EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASSWORD, EMAIL_TO]):
-        raise HTTPException(status_code=500, detail="Email configuration is incomplete")
-    
-    try:
-        # Crear el mensaje
-        msg = MIMEMultipart()
-        msg['From'] = EMAIL_USER
-        msg['To'] = EMAIL_TO
-        msg['Subject'] = f"Nuevo mensaje de contacto de {request.name}"
-        
-        # Construir el cuerpo del mensaje
-        body = f"""
-        Has recibido un nuevo mensaje de contacto:
-        
-        Nombre: {request.name}
-        Email: {request.email}
-        
-        Mensaje:
-        {request.message}
-        """
+        raise HTTPException(status_code=500, detail="Error al enviar el mensaje. Por favor, inténtelo de nuevo más tarde.")
         
         msg.attach(MIMEText(body, 'plain'))
         
