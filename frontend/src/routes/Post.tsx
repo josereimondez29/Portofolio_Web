@@ -30,6 +30,12 @@ const GET_POST = gql`
   }
 `;
 
+interface HashnodePostResponse {
+  publication: {
+    post: PostType | null;
+  };
+}
+
 const Post = ({ language }: { language: string }): React.ReactElement => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -40,7 +46,7 @@ const Post = ({ language }: { language: string }): React.ReactElement => {
   React.useEffect(() => {
     const fetchPost = async () => {
       try {
-        const data = await request(
+        const data = await request<HashnodePostResponse>(
           'https://gql.hashnode.com',
           GET_POST,
           { slug }
