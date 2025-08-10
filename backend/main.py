@@ -60,7 +60,8 @@ async def contact(request: ContactRequest):
         print("Creando mensaje de email...")
         # Crear el mensaje
         msg = MIMEMultipart()
-        msg['From'] = f"Formulario de Contacto <{EMAIL_USER}>"
+        from_email = EMAIL_USER if '@' in EMAIL_USER else f"{EMAIL_USER}@josereimondez.com"
+        msg['From'] = f"Formulario de Contacto <{from_email}>"
         msg['To'] = EMAIL_TO
         msg['Subject'] = f"Nuevo mensaje de contacto de {request.name}"
         msg['Reply-To'] = request.email
@@ -83,16 +84,29 @@ async def contact(request: ContactRequest):
 
         print(f"Conectando al servidor SMTP {EMAIL_HOST}:{EMAIL_PORT}...")
         # Conectar al servidor SMTP y enviar el correo
-        with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
-            server.set_debuglevel(1)  # Habilitar debug
+        try:
+            server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
+            server.set_debuglevel(1)  # Habilitar debug para ver más detalles
             print("Iniciando TLS...")
+            server.ehlo()  # Identificarse con el servidor
             server.starttls()
+            server.ehlo()  # Re-identificarse sobre TLS
             print(f"Intentando login con usuario: {EMAIL_USER}")
-            server.login(EMAIL_USER, EMAIL_PASSWORD)
+            # Asegurarse de que el EMAIL_USER sea el correo completo
+            login_user = EMAIL_USER if '@' in EMAIL_USER else f"{EMAIL_USER}@josereimondez.com"
+            server.login(login_user, EMAIL_PASSWORD)
             print("Login exitoso")
             print("Enviando mensaje...")
             server.send_message(msg)
             print("Mensaje enviado exitosamente")
+            server.quit()
+        except smtplib.SMTPAuthenticationError as e:
+            print(f"Error detallado de autenticación: {str(e)}")
+            print(f"Intentando autenticar con: {login_user}")
+            raise
+        except Exception as e:
+            print(f"Error detallado: {str(e)}")
+            raise
 
         return {"message": "¡Mensaje enviado correctamente! Gracias por contactar."}
     except smtplib.SMTPAuthenticationError as e:
