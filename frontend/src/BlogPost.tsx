@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import type { Post } from './types/BlogTypes';
+import { Helmet } from 'react-helmet';
 
 interface BlogPostProps {
   post: Post;
@@ -11,14 +12,38 @@ interface BlogPostProps {
 }
 
 export default function BlogPost({ post, language, onBack }: BlogPostProps) {
+  const postUrl = `https://josereimondez.com/blog/${post.slug}`;
+
   return (
     <article className="max-w-4xl mx-auto">
+      <Helmet>
+        <title>{post.title} - José Reimondez</title>
+        <meta name="description" content={post.brief || ''} />
+        
+        {/* Meta tags para LinkedIn */}
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.brief || ''} />
+        <meta property="og:url" content={postUrl} />
+        {post.coverImage?.url && (
+          <meta property="og:image" content={post.coverImage.url} />
+        )}
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="José Reimondez - Portafolio Web" />
+        
+        {/* Meta tags para Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.brief || ''} />
+        {post.coverImage?.url && (
+          <meta name="twitter:image" content={post.coverImage.url} />
+        )}
+      </Helmet>
+
       <button
         onClick={onBack}
         className="mb-8 text-navy-600 hover:text-navy-800 flex items-center"
       >
         ← {language === 'es' ? 'Volver al blog' : 'Back to blog'}
-      </button>
       
       {post.coverImage?.url && (
         <div className="aspect-video w-full overflow-hidden rounded-lg mb-8">
