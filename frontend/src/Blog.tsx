@@ -205,9 +205,12 @@ const Blog = ({ language }: BlogProps): React.ReactElement => {
                           <div className="flex items-center justify-start space-x-4 pt-2 border-t border-gray-200 mt-4">
                             <button
                               onClick={() => {
+                                const text = `${post.title}\n\n${post.brief || ''}`; 
                                 const url = `https://portofolio.hashnode.dev/${post.slug}`;
-                                const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-                                window.open(shareUrl, '_blank', 'noopener,noreferrer');
+                                window.open(
+                                  `https://www.linkedin.com/feed/share?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
+                                  '_blank'
+                                );
                               }}
                               className="text-navy-600 hover:text-[#0077b5] transition-colors duration-200"
                               title="Compartir en LinkedIn"
