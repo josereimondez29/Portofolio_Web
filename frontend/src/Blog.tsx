@@ -206,12 +206,10 @@ const Blog = ({ language }: BlogProps): React.ReactElement => {
                             <button
                               onClick={() => {
                                 const url = `https://portofolio.hashnode.dev/${post.slug}`;
-                                const title = post.title;
-                                const summary = post.brief;
-                                window.open(
-                                  `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(summary)}`,
-                                  '_blank'
-                                );
+                                const title = encodeURIComponent(post.title);
+                                const summary = encodeURIComponent(post.brief || '');
+                                const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${title}&summary=${summary}&source=JoseReimondez.com`;
+                                window.open(linkedinUrl, '_blank', 'width=600,height=600');
                               }}
                               className="text-navy-600 hover:text-[#0077b5] transition-colors duration-200"
                               title="Compartir en LinkedIn"
