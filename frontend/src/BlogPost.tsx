@@ -44,6 +44,7 @@ export default function BlogPost({ post, language, onBack }: BlogPostProps) {
         className="mb-8 text-navy-600 hover:text-navy-800 flex items-center"
       >
         ← {language === 'es' ? 'Volver al blog' : 'Back to blog'}
+      </button>
       
       {post.coverImage?.url && (
         <div className="aspect-video w-full overflow-hidden rounded-lg mb-8">
