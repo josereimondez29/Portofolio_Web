@@ -58,7 +58,7 @@ function App() {
           <div className="absolute inset-0 border-4 border-navy-600 rounded-full animate-spin border-t-transparent"></div>
         </div>
         <div className="text-2xl font-semibold text-navy-800">
-          {language === 'es' ? 'Cargando tu portfolio...' : 'Loading your portfolio...'}
+          {language === 'es' ? 'Cargando tu portafolio...' : 'Loading your portfolio...'}
         </div>
         <div className="mt-4 text-navy-600 animate-pulse">
           {language === 'es' ? 'Por favor, espera un momento' : 'Please wait a moment'}

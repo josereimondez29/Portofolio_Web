@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { SiCredly } from 'react-icons/si';
+import { Helmet } from 'react-helmet';
 import type { CVData } from './types/CVData';
 
 interface LayoutProps {
@@ -18,6 +19,9 @@ const Layout: React.FC<LayoutProps> = ({ children, language, setLanguage, data }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+      <Helmet>
+        <title>José Reimondez - {language === 'es' ? 'Portafolio Web' : 'Portfolio Web'}</title>
+      </Helmet>
       <header className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
