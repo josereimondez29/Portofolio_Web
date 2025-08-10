@@ -23,18 +23,20 @@ function Contact({ language }: ContactProps) {
         body: JSON.stringify(contactData),
       });
 
+      const data = await response.json();
+      
       if (!response.ok) {
-        throw new Error('Error en la respuesta del servidor');
+        throw new Error(data.detail || 'Error en la respuesta del servidor');
       }
 
-      const data = await response.json();
       alert(data.message);
       (event.target as HTMLFormElement).reset();
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
       alert(language === 'es' 
-        ? 'Lo siento, ha ocurrido un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.' 
-        : 'Sorry, there was an error sending your message. Please try again later.');
+        ? `Lo siento, ha ocurrido un error al enviar el mensaje: ${errorMessage}` 
+        : `Sorry, there was an error sending your message: ${errorMessage}`);
     }
   };
 

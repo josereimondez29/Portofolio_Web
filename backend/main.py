@@ -49,6 +49,11 @@ def get_cv_en():
 @app.post("/api/contact")
 async def contact(request: ContactRequest):
     print(f"Iniciando envío de email para {request.name}")
+    print(f"Configuración actual:")
+    print(f"EMAIL_HOST: {'Configurado' if EMAIL_HOST else 'No configurado'}")
+    print(f"EMAIL_PORT: {'Configurado' if EMAIL_PORT else 'No configurado'}")
+    print(f"EMAIL_USER: {'Configurado' if EMAIL_USER else 'No configurado'}")
+    print(f"EMAIL_PASSWORD: {'Configurado (longitud: ' + str(len(EMAIL_PASSWORD)) + ')' if EMAIL_PASSWORD else 'No configurado'}")
     
     # Verificar configuración
     if not all([EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASSWORD]):
@@ -59,8 +64,9 @@ async def contact(request: ContactRequest):
             'EMAIL_USER': EMAIL_USER,
             'EMAIL_PASSWORD': EMAIL_PASSWORD
         }.items() if not val]
-        print(f"Variables faltantes: {', '.join(missing_vars)}")
-        raise HTTPException(status_code=500, detail="La configuración del email está incompleta")
+        error_msg = f"La configuración del email está incompleta. Variables faltantes: {', '.join(missing_vars)}"
+        print(error_msg)
+        raise HTTPException(status_code=500, detail=error_msg)
     
     try:
         print("Creando mensaje de email...")
@@ -96,16 +102,26 @@ async def contact(request: ContactRequest):
 
         return {"message": "¡Mensaje enviado correctamente! Gracias por contactar."}
     except smtplib.SMTPAuthenticationError as e:
-        print(f"Error de autenticación SMTP: {str(e)}")
+        error_msg = f"Error de autenticación SMTP: {str(e)}"
+        print(error_msg)
+        print(f"Usuario utilizado: {EMAIL_USER}")
         raise HTTPException(
             status_code=500,
-            detail="Error de autenticación al enviar el mensaje. Por favor, contacta al administrador."
+            detail=f"Error de autenticación al enviar el mensaje: {str(e)}"
+        )
+    except smtplib.SMTPException as e:
+        error_msg = f"Error SMTP: {str(e)}"
+        print(error_msg)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error al conectar con el servidor de correo: {str(e)}"
         )
     except Exception as e:
-        print(f"Error al enviar el email: {str(e)}")
+        error_msg = f"Error inesperado al enviar el email: {str(e)}"
+        print(error_msg)
         raise HTTPException(
             status_code=500,
-            detail="Error al enviar el mensaje. Por favor, inténtelo de nuevo más tarde."
+            detail=f"Error inesperado al enviar el mensaje: {str(e)}"
         )
 
 @app.get("/api/github/pinned-projects")
