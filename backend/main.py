@@ -14,11 +14,11 @@ from email.mime.multipart import MIMEMultipart
 load_dotenv()  # Cargar variables de entorno desde .env
 
 # Configuración de email
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.ionos.es')
 EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
-EMAIL_USER = os.getenv('EMAIL_USER')
+EMAIL_USER = os.getenv('EMAIL_USER')  # debe ser tu correo completo de IONOS
 EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
-EMAIL_TO = os.getenv('EMAIL_TO')
+EMAIL_TO = 'dev@josereimondez.com'
 
 app = FastAPI()
 
@@ -48,43 +48,35 @@ def get_cv_en():
 
 @app.post("/api/contact")
 async def contact(request: ContactRequest):
-    print(f"Iniciando envío de email para {request.name}")
-    print(f"Configuración actual:")
-    print(f"EMAIL_HOST: {'Configurado' if EMAIL_HOST else 'No configurado'}")
-    print(f"EMAIL_PORT: {'Configurado' if EMAIL_PORT else 'No configurado'}")
-    print(f"EMAIL_USER: {'Configurado' if EMAIL_USER else 'No configurado'}")
-    print(f"EMAIL_PASSWORD: {'Configurado (longitud: ' + str(len(EMAIL_PASSWORD)) + ')' if EMAIL_PASSWORD else 'No configurado'}")
+    print(f"Iniciando envío de email desde {EMAIL_USER} para el mensaje de {request.name}")
     
     # Verificar configuración
     if not all([EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASSWORD]):
-        print("Error: Configuración de email incompleta")
-        missing_vars = [var for var, val in {
-            'EMAIL_HOST': EMAIL_HOST,
-            'EMAIL_PORT': EMAIL_PORT,
-            'EMAIL_USER': EMAIL_USER,
-            'EMAIL_PASSWORD': EMAIL_PASSWORD
-        }.items() if not val]
-        error_msg = f"La configuración del email está incompleta. Variables faltantes: {', '.join(missing_vars)}"
-        print(error_msg)
+        error_msg = "La configuración del email está incompleta"
+        print(f"Error: {error_msg}")
         raise HTTPException(status_code=500, detail=error_msg)
     
     try:
         print("Creando mensaje de email...")
         # Crear el mensaje
         msg = MIMEMultipart()
-        msg['From'] = EMAIL_USER
-        msg['To'] = "dev@josereimondez.com"
+        msg['From'] = f"Formulario de Contacto <{EMAIL_USER}>"
+        msg['To'] = EMAIL_TO
         msg['Subject'] = f"Nuevo mensaje de contacto de {request.name}"
+        msg['Reply-To'] = request.email
 
         # Construir el cuerpo del mensaje
         body = f"""
-        Has recibido un nuevo mensaje de contacto:
+        Has recibido un nuevo mensaje de contacto a través del formulario de tu web:
         
         Nombre: {request.name}
         Email: {request.email}
         
         Mensaje:
         {request.message}
+        
+        --
+        Este mensaje fue enviado desde el formulario de contacto en josereimondez.com
         """
         
         msg.attach(MIMEText(body, 'plain'))
