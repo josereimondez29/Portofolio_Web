@@ -148,14 +148,14 @@ const Blog = ({ language }: BlogProps): React.ReactElement => {
                           <div className="flex items-center justify-start space-x-4 pt-2 border-t border-gray-200 mt-4">
                             <button
                               onClick={() => {
-                                // Construimos la URL de tu portfolio con un hash para el post específico
-                                const portfolioUrl = `https://josereimondez.com/#blog-${post.slug}`;
+                                // Construimos la URL completa del post
+                                const postUrl = `https://josereimondez.com/blog/${post.slug}`;
                                 // Preparamos el título y descripción para compartir
                                 const title = post.title;
                                 const description = post.brief || '';
                                 
                                 window.open(
-                                  `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(portfolioUrl)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(description)}&source=Portfolio José Reimóndez`,
+                                  `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(postUrl)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(description)}&source=Portfolio José Reimondez`,
                                   '_blank',
                                   'width=600,height=600'
                                 );
