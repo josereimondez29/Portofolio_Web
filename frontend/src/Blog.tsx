@@ -204,7 +204,15 @@ const Blog = ({ language }: BlogProps): React.ReactElement => {
                           </button>
                           <div className="flex items-center justify-start space-x-4 pt-2 border-t border-gray-200 mt-4">
                             <button
-                              onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=https://portofolio.hashnode.dev/${post.slug}`, '_blank')}
+                              onClick={() => {
+                                const url = `https://portofolio.hashnode.dev/${post.slug}`;
+                                const title = post.title;
+                                const summary = post.brief;
+                                window.open(
+                                  `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(summary)}`,
+                                  '_blank'
+                                );
+                              }}
                               className="text-navy-600 hover:text-[#0077b5] transition-colors duration-200"
                               title="Compartir en LinkedIn"
                             >
@@ -213,7 +221,22 @@ const Blog = ({ language }: BlogProps): React.ReactElement => {
                               </svg>
                             </button>
                             <button
-                              onClick={() => window.open(`mailto:?subject=${encodeURIComponent(post.title)}&body=https://portofolio.hashnode.dev/${post.slug}`)}
+                              onClick={() => {
+                                const url = `https://portofolio.hashnode.dev/${post.slug}`;
+                                const title = post.title;
+                                const excerpt = post.brief;
+                                const emailBody = `
+${title}
+
+${excerpt}
+
+Continuar leyendo en: ${url}
+                                `;
+                                window.open(
+                                  `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(emailBody)}`,
+                                  '_blank'
+                                );
+                              }}
                               className="text-navy-600 hover:text-gray-800 transition-colors duration-200"
                               title="Compartir por Email"
                             >
