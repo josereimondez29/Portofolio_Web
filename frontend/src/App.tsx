@@ -10,75 +10,65 @@ const Blog = lazy(() => import('./Blog'));
 const Contact = lazy(() => import('./Contact'));
 const Post = lazy(() => import('./routes/Post'));
 
+const initialData: CVData = {
+  name: "José Reimondez",
+  title: "",
+  contact: {
+    phone: "",
+    email: "",
+    linkedin: "https://linkedin.com/in/josereimondez",
+    github: "https://github.com/josereimondez29",
+    credly: "https://www.credly.com/users/jose-reimondez",
+    portfolio: "https://josereimondez.com",
+    location: ""
+  },
+  profile: "",
+  skills: {},
+  experience: [],
+  education: [],
+  languages: [],
+  certifications: []
+};
+
 function App() {
   const [language, setLanguage] = useState('es');
-  const [data, setData] = useState<CVData | null>(null);
-  const [isError, setIsError] = useState(false);
+  const [data, setData] = useState<CVData>(initialData);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
 
     const fetchData = async () => {
       try {
-        console.log('Iniciando fetch de datos...');
+        setLoading(true);
         const response = await fetch(`https://josereimondez-portfolio-backend.onrender.com/api/${language}`);
-        console.log('Respuesta recibida:', response.status);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const jsonData = await response.json();
-        console.log('Datos recibidos:', jsonData);
         
         if (isMounted) {
           setData(jsonData);
-          setIsError(false);
+          setLoading(false);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
         if (isMounted) {
-          setIsError(true);
-          setData({
-            name: "José Reimondez",
-            title: language === 'es' ? "Desarrollador Full Stack" : "Full Stack Developer",
-            contact: {
-              phone: "",
-              email: "",
-              linkedin: "https://www.linkedin.com/",
-              github: "https://github.com/",
-              credly: "",
-              portfolio: "",
-              location: ""
-            },
-            profile: "",
-            skills: {},
-            experience: [],
-            education: [],
-            languages: [],
-            certifications: []
-          });
+          setLoading(false);
         }
       }
     };
 
     fetchData();
     
-    // Configurar un intervalo para reintentar si hay error
-    let retryInterval: NodeJS.Timeout;
-    if (isError) {
-      retryInterval = setInterval(fetchData, 5000); // Reintentar cada 5 segundos
-    }
-
     return () => {
       isMounted = false;
-      if (retryInterval) {
-        clearInterval(retryInterval);
-      }
     };
-  }, [language, isError]);
+  }, [language]);
 
-  if (!data) {
+  if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-navy-50 to-navy-100">
         <div className="w-24 h-24 mb-8 relative">
@@ -88,15 +78,9 @@ function App() {
         <div className="text-2xl font-semibold text-navy-800">
           {language === 'es' ? 'Cargando Portafolio...' : 'Loading Portfolio...'}
         </div>
-        {isError ? (
-          <div className="mt-4 text-red-600">
-            {language === 'es' ? 'Error al cargar los datos. Reintentando...' : 'Error loading data. Retrying...'}
-          </div>
-        ) : (
-          <div className="mt-4 text-navy-600 animate-pulse">
-            {language === 'es' ? 'Por favor, espera un momento' : 'Please wait a moment'}
-          </div>
-        )}
+        <div className="mt-4 text-navy-600 animate-pulse">
+          {language === 'es' ? 'Por favor, espera un momento' : 'Please wait a moment'}
+        </div>
       </div>
     );
   }
@@ -117,7 +101,7 @@ function App() {
             <Route path="/projects" element={<Projects language={language} />} />
             <Route path="/blog" element={<Blog language={language} />} />
             <Route path="/blog/:slug" element={<Post language={language} />} />
-            <Route path="/contact" element={<Contact language={language} data={data} />} />
+            <Route path="/contact" element={<Contact language={language} />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
