@@ -205,11 +205,11 @@ const Blog = ({ language }: BlogProps): React.ReactElement => {
                           <div className="flex items-center justify-start space-x-4 pt-2 border-t border-gray-200 mt-4">
                             <button
                               onClick={() => {
-                                const text = `${post.title}\n\n${post.brief || ''}`; 
                                 const url = `https://portofolio.hashnode.dev/${post.slug}`;
                                 window.open(
-                                  `https://www.linkedin.com/feed/share?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-                                  '_blank'
+                                  `https://www.linkedin.com/share/url?url=${encodeURIComponent(url)}`,
+                                  '_blank',
+                                  'width=600,height=600'
                                 );
                               }}
                               className="text-navy-600 hover:text-[#0077b5] transition-colors duration-200"
