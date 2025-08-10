@@ -51,6 +51,7 @@ export default function BlogPost({ post, language, onBack }: BlogPostProps) {
           <img 
             src={post.coverImage.url} 
             alt={post.title}
+            loading="lazy"
             className="w-full h-full object-cover"
           />
         </div>
@@ -102,11 +103,8 @@ export default function BlogPost({ post, language, onBack }: BlogPostProps) {
             <button
               onClick={() => {
                 const postUrl = `https://josereimondez.com/blog/${post.slug}`;
-                const title = post.title;
-                const description = post.brief || '';
-                
                 window.open(
-                  `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(postUrl)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(description)}&source=Portfolio José Reimondez`,
+                  `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`,
                   '_blank',
                   'width=600,height=600'
                 );

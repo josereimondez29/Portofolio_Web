@@ -25,10 +25,31 @@ const Layout: React.FC<LayoutProps> = ({ children, language, setLanguage, data }
       <header className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            {/* Logo y título */}
-            <h1 className="text-2xl font-bold text-navy-600">
-              {language === 'es' ? 'Portafolio Web' : 'Portfolio Web'}
-            </h1>
+            {/* Logo y título, botones de idioma para móvil */}
+            <div className="flex items-center space-x-4">
+              <h1 className="text-2xl font-bold text-navy-600">
+                {language === 'es' ? 'Portafolio Web' : 'Portfolio Web'}
+              </h1>
+              {/* Botones de idioma siempre visibles en móvil */}
+              <div className="flex space-x-2 md:hidden">
+                <button
+                  onClick={() => setLanguage('es')}
+                  className={`px-2 py-1 rounded text-white text-sm font-medium transition-all duration-300 ${
+                    language === 'es' ? 'bg-navy-800' : 'bg-navy-600'
+                  }`}
+                >
+                  ESP
+                </button>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`px-2 py-1 rounded text-white text-sm font-medium transition-all duration-300 ${
+                    language === 'en' ? 'bg-navy-800' : 'bg-navy-600'
+                  }`}
+                >
+                  ENG
+                </button>
+              </div>
+            </div>
 
             {/* Navegación para pantallas grandes */}
             <nav className="hidden md:block">
@@ -84,20 +105,53 @@ const Layout: React.FC<LayoutProps> = ({ children, language, setLanguage, data }
               </ul>
             </nav>
 
-            {/* Botones de idioma para pantallas grandes */}
-            <div className="hidden md:flex space-x-2">
-              <button
-                onClick={() => setLanguage('es')}
-                className={`px-4 py-2 rounded-lg text-white text-sm font-medium transition-all duration-300 ${
-                  language === 'es' ? 'bg-navy-800' : 'bg-navy-600 hover:bg-navy-700'
-                }`}
-              >
-                Español
-              </button>
-              <button
-                onClick={() => setLanguage('en')}
-                className={`px-4 py-2 rounded-lg text-white text-sm font-medium transition-all duration-300 ${
-                  language === 'en' ? 'bg-navy-800' : 'bg-navy-600 hover:bg-navy-700'
+            {/* Botones de idioma y redes sociales para pantallas grandes */}
+            <div className="hidden md:flex items-center space-x-4">
+              {/* Redes sociales */}
+              <div className="flex space-x-4 mr-4">
+                <a
+                  href={data?.contact.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-navy-600 hover:text-navy-800"
+                  title="GitHub"
+                >
+                  <FaGithub size={20} />
+                </a>
+                <a
+                  href={data?.contact.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-navy-600 hover:text-[#0077b5]"
+                  title="LinkedIn"
+                >
+                  <FaLinkedin size={20} />
+                </a>
+                <a
+                  href={data?.contact.credly}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-navy-600 hover:text-[#FF6B00]"
+                  title="Credly"
+                >
+                  <SiCredly size={20} />
+                </a>
+              </div>
+              
+              {/* Botones de idioma */}
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => setLanguage('es')}
+                  className={`px-4 py-2 rounded-lg text-white text-sm font-medium transition-all duration-300 ${
+                    language === 'es' ? 'bg-navy-800' : 'bg-navy-600 hover:bg-navy-700'
+                  }`}
+                >
+                  Español
+                </button>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`px-4 py-2 rounded-lg text-white text-sm font-medium transition-all duration-300 ${
+                    language === 'en' ? 'bg-navy-800' : 'bg-navy-600 hover:bg-navy-700'
                 }`}
               >
                 English
@@ -152,31 +206,6 @@ const Layout: React.FC<LayoutProps> = ({ children, language, setLanguage, data }
                   {language === 'es' ? 'Contacto' : 'Contact'}
                 </Link>
 
-                {/* Botones de idioma en móvil */}
-                <div className="flex space-x-2 mt-4 px-3">
-                  <button
-                    onClick={() => {
-                      setLanguage('es');
-                      setIsMenuOpen(false);
-                    }}
-                    className={`px-3 py-1 rounded text-white text-sm font-medium transition-all duration-300 ${
-                      language === 'es' ? 'bg-navy-800' : 'bg-navy-600'
-                    }`}
-                  >
-                    ESP
-                  </button>
-                  <button
-                    onClick={() => {
-                      setLanguage('en');
-                      setIsMenuOpen(false);
-                    }}
-                    className={`px-3 py-1 rounded text-white text-sm font-medium transition-all duration-300 ${
-                      language === 'en' ? 'bg-navy-800' : 'bg-navy-600'
-                    }`}
-                  >
-                    ENG
-                  </button>
-                </div>
               </nav>
 
               {/* Iconos de redes sociales centrados en móvil */}
