@@ -206,7 +206,8 @@ const Blog = ({ language }: BlogProps): React.ReactElement => {
                             <button
                               onClick={() => {
                                 const url = `https://portofolio.hashnode.dev/${post.slug}`;
-                                window.open(`https://www.linkedin.com/cws/share?url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=600');
+                                const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+                                window.open(shareUrl, '_blank', 'noopener,noreferrer');
                               }}
                               className="text-navy-600 hover:text-[#0077b5] transition-colors duration-200"
                               title="Compartir en LinkedIn"
