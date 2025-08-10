@@ -13,9 +13,9 @@ from email.mime.multipart import MIMEMultipart
 
 load_dotenv()  # Cargar variables de entorno desde .env
 
-# Configuración de email - Usando configuración oficial de IONOS
+# Configuración de email - Usando configuración oficial de IONOS con SSL
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.ionos.es')  # Servidor SMTP oficial de IONOS
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))       # Puerto TLS requerido
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '465'))       # Puerto SSL
 EMAIL_USER = os.getenv('EMAIL_USER')                   # contactos@josereimondez.com
 EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')           # Contraseña del correo
 EMAIL_TO = 'dev@josereimondez.com'                    # Correo destino
@@ -85,12 +85,10 @@ async def contact(request: ContactRequest):
         print(f"Conectando al servidor SMTP {EMAIL_HOST}:{EMAIL_PORT}...")
         # Conectar al servidor SMTP y enviar el correo
         try:
-            server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
+            print("Iniciando conexión SSL...")
+            server = smtplib.SMTP_SSL(EMAIL_HOST, EMAIL_PORT)
             server.set_debuglevel(1)  # Habilitar debug para ver más detalles
-            print("Iniciando TLS...")
-            server.ehlo()  # Identificarse con el servidor
-            server.starttls()
-            server.ehlo()  # Re-identificarse sobre TLS
+            print("Conexión SSL establecida")
             print(f"Intentando login con usuario: {EMAIL_USER}")
             # Asegurarse de que el EMAIL_USER sea el correo completo
             login_user = EMAIL_USER if '@' in EMAIL_USER else f"{EMAIL_USER}@josereimondez.com"
