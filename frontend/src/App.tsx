@@ -1,4 +1,5 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { SiCredly } from 'react-icons/si';
 import type { CVData } from './types/CVData';
@@ -8,6 +9,7 @@ const Profile = lazy(() => import('./Profile'));
 const Projects = lazy(() => import('./Projects'));
 const Blog = lazy(() => import('./Blog'));
 const Contact = lazy(() => import('./Contact'));
+const Post = lazy(() => import('./routes/Post'));
 
 function App() {
   const [language, setLanguage] = useState('es');

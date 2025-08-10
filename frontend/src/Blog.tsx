@@ -1,48 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { request, gql } from 'graphql-request';
 import type { Post, HashnodeResponse } from './types/BlogTypes';
-import BlogPost from './BlogPost';
 
-interface PostModalProps {
-  post: Post;
-  language: string;
-  onClose: () => void;
-}
 
-const PostModal: React.FC<PostModalProps> = ({ post, language, onClose }) => (
-  <div className="fixed inset-0 z-50 overflow-y-auto">
-    <div className="flex min-h-screen items-end justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0">
-      <div 
-        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
-        onClick={onClose}
-        aria-hidden="true"
-      />
-      <span className="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true">&#8203;</span>
-      <div className="relative inline-block w-full max-w-4xl transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:align-middle">
-        <div className="sticky top-0 z-10 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-navy-800 truncate">{post.title}</h2>
-          <button
-            type="button"
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 p-2"
-            aria-label="Cerrar"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <div className="p-6">
-          <BlogPost 
-            post={post}
-            language={language}
-            onBack={onClose}
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-);
 
 interface BlogProps {
   language: string;
@@ -82,13 +43,7 @@ const Blog = ({ language }: BlogProps): React.ReactElement => {
   const [posts, setPosts] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
-  const [selectedPost, setSelectedPost] = React.useState<Post | null>(null);
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  
-  const handleCloseModal = useCallback(() => {
-    setIsModalOpen(false);
-    setSelectedPost(null);
-  }, []);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const fetchPosts = async () => {
@@ -133,16 +88,7 @@ const Blog = ({ language }: BlogProps): React.ReactElement => {
     );
   }
 
-  const renderModal = () => {
-    if (!isModalOpen || !selectedPost) return null;
-    return (
-      <PostModal
-        post={selectedPost}
-        language={language}
-        onClose={handleCloseModal}
-      />
-    );
-  };
+  // Eliminamos la función renderModal ya que no la necesitamos más
 
   return (
     <>
@@ -194,10 +140,7 @@ const Blog = ({ language }: BlogProps): React.ReactElement => {
                             </div>
                           </div>
                           <button
-                            onClick={() => {
-                              setSelectedPost(post);
-                              setIsModalOpen(true);
-                            }}
+                            onClick={() => navigate(`/blog/${post.slug}`)}
                             className="w-full py-2 mt-4 text-navy-600 hover:text-white hover:bg-navy-600 border border-navy-600 rounded-lg transition-all duration-200 text-center"
                           >
                             {language === 'es' ? 'Leer artículo' : 'Read article'}
@@ -277,7 +220,6 @@ Continuar leyendo en: ${url}
           </div>
         </div>
       </div>
-      {renderModal()}
     </>
   );
 };
