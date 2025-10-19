@@ -42,6 +42,24 @@ function Profile({ data, language }: ProfileProps) {
                     <span className="w-5 text-navy-600">📍</span>
                     {data.contact.location}
                   </p>
+                  <div className="mt-4 flex gap-3">
+                    <a
+                      href={language === 'es' ? '/cv_es.pdf' : '/cv_en.pdf'}
+                      onClick={(e) => {
+                        // fallback to html if pdf not present
+                        const pdfPath = language === 'es' ? '/cv_es.pdf' : '/cv_en.pdf';
+                        const htmlPath = language === 'es' ? '/cv_es.html' : '/cv_en.html';
+                        fetch(pdfPath, { method: 'HEAD' }).then(res => {
+                          if (!res.ok) window.location.href = htmlPath;
+                          else window.location.href = pdfPath;
+                        }).catch(() => { window.location.href = htmlPath; });
+                        e.preventDefault();
+                      }}
+                      className="inline-block bg-navy-600 text-white px-4 py-2 rounded-md hover:bg-navy-700"
+                    >
+                      {language === 'es' ? 'Descargar CV (ES)' : 'Download CV (EN)'}
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
