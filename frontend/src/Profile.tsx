@@ -71,10 +71,10 @@ function Profile({ data, language }: ProfileProps) {
                   </p>
                   <div className="mt-4 flex gap-3">
                     <a
-                      href={language === 'es' ? '/cv_es.pdf' : '/cv_en.pdf'}
+                      href={language === 'es' ? '/cv_Jose Reimondez_ESP.pdf' : '/cv_Jose Reimondez_ENG.pdf'}
                       onClick={(e) => {
-                        // fallback to html if pdf not present
-                        const pdfPath = language === 'es' ? '/cv_es.pdf' : '/cv_en.pdf';
+                        // try exact filenames (keep original names). fallback to existing HTML if not present.
+                        const pdfPath = language === 'es' ? '/cv_Jose Reimondez_ESP.pdf' : '/cv_Jose Reimondez_ENG.pdf';
                         const htmlPath = language === 'es' ? '/cv_es.html' : '/cv_en.html';
                         fetch(pdfPath, { method: 'HEAD' }).then(res => {
                           if (!res.ok) window.location.href = htmlPath;
