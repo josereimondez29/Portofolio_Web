@@ -35,6 +35,29 @@ function Profile({ data, language }: ProfileProps) {
       );
     });
   };
+
+  const downloadFile = async (pdfPath: string, htmlPath: string, filename: string) => {
+    try {
+      const res = await fetch(pdfPath);
+      if (!res.ok) {
+        // fallback to html page
+        window.location.href = htmlPath;
+        return;
+      }
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch {
+      // on error, fallback to html
+      window.location.href = htmlPath;
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
@@ -73,14 +96,11 @@ function Profile({ data, language }: ProfileProps) {
                     <a
                       href={language === 'es' ? '/cv_Jose Reimondez_ESP.pdf' : '/cv_Jose Reimondez_ENG.pdf'}
                       onClick={(e) => {
-                        // try exact filenames (keep original names). fallback to existing HTML if not present.
+                        e.preventDefault();
                         const pdfPath = language === 'es' ? '/cv_Jose Reimondez_ESP.pdf' : '/cv_Jose Reimondez_ENG.pdf';
                         const htmlPath = language === 'es' ? '/cv_es.html' : '/cv_en.html';
-                        fetch(pdfPath, { method: 'HEAD' }).then(res => {
-                          if (!res.ok) window.location.href = htmlPath;
-                          else window.location.href = pdfPath;
-                        }).catch(() => { window.location.href = htmlPath; });
-                        e.preventDefault();
+                        const filename = language === 'es' ? 'cv_Jose Reimondez_ESP.pdf' : 'cv_Jose Reimondez_ENG.pdf';
+                        void downloadFile(pdfPath, htmlPath, filename);
                       }}
                       className="inline-block bg-navy-600 text-white px-4 py-2 rounded-md hover:bg-navy-700"
                     >
