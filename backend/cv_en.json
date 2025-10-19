@@ -29,20 +29,20 @@
       "date": "October 2025 – Present",
       "description": [
         "Server & Infrastructure Management:",
-  "• Administer and maintain Linux-based servers (CLI management, updates, security, monitoring).",
-  "• Manage Docker environments for containerized services.",
-  "• Oversee NAS systems (Synology and other enterprise storage solutions).",
-  "• Ensure system backups, redundancy, and data integrity.",
+    "Administer and maintain Linux-based servers (CLI management, updates, security, monitoring).",
+    "Manage Docker environments for containerized services.",
+    "Oversee NAS systems (Synology and other enterprise storage solutions).",
+    "Ensure system backups, redundancy, and data integrity.",
         "Video-over-IP Systems:",
-  "• Deploy and maintain Video over IP (VoIP / AV-over-IP) solutions.",
-  "• Optimize network configurations for real-time video transport (multicast, QoS, bandwidth management).",
-  "• Troubleshoot latency, synchronization, and streaming performance issues.",
+    "Deploy and maintain Video over IP (VoIP / AV-over-IP) solutions.",
+    "Optimize network configurations for real-time video transport (multicast, QoS, bandwidth management).",
+    "Troubleshoot latency, synchronization, and streaming performance issues.",
         "Automation & Control Systems:",
-  "• Integrate and manage KNX, Crestron, or similar automation platforms.",
-  "• Configure AV control workflows for seamless room and system automation.",
+    "Integrate and manage KNX, Crestron, or similar automation platforms.",
+    "Configure AV control workflows for seamless room and system automation.",
         "Networking & Security:",
-  "• Maintain secure, high-availability networks for video and IT systems.",
-  "• Manage VLANs, firewalls, and VPNs to support AV and IT environments."
+    "Maintain secure, high-availability networks for video and IT systems.",
+    "Manage VLANs, firewalls, and VPNs to support AV and IT environments."
       ]
     },
     {

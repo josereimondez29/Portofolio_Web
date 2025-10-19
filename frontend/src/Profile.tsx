@@ -8,6 +8,31 @@ interface ProfileProps {
 }
 
 function Profile({ data, language }: ProfileProps) {
+  const isTitleLine = (text: string) => {
+    // Consider lines that end with ':' or are short capitalized section titles as headers
+    const t = text.trim();
+    return t.endsWith(':') || /^[A-ZÁÉÍÓÚÑ0-9-\s&/]+:$/.test(t) || (t.length < 40 && t[0] === t[0].toUpperCase());
+  };
+
+  const renderDescriptionLines = (lines: string[]) => {
+    return lines.map((line, idx) => {
+      const trimmed = line.trim();
+      if (!trimmed) return null;
+      if (isTitleLine(trimmed) || /:$/.test(trimmed)) {
+        // render as a small header without a bullet
+        return (
+          <h5 key={idx} className="text-sm font-semibold text-navy-800 mt-3 mb-1">{trimmed.replace(/:$/, '')}</h5>
+        );
+      }
+      // render as a single bullet item
+      return (
+        <div key={idx} className="flex items-start gap-3 mt-1">
+          <span className="text-navy-600 mt-1">•</span>
+          <p className="text-gray-700 leading-relaxed text-base">{trimmed}</p>
+        </div>
+      );
+    });
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
@@ -90,11 +115,9 @@ function Profile({ data, language }: ProfileProps) {
               <div key={index} className="p-5 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
                 <h4 className="text-xl font-bold text-gray-800">{job.role}</h4>
                 <p className="text-gray-600 mb-2 text-base">{job.company} | {job.location} | {job.date}</p>
-                <ul className="list-disc list-inside text-gray-700 space-y-1 text-base">
-                  {job.description.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
+                <div className="text-base">
+                  {renderDescriptionLines(job.description)}
+                </div>
               </div>
             ))}
           </div>

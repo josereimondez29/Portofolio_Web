@@ -30,20 +30,20 @@
       "date": "Octubre 2025 – Presente",
       "description": [
         "Gestión de Servidores e Infraestructura:",
-  "• Administrar y mantener servidores basados en Linux (gestión por CLI, actualizaciones, seguridad, monitorización).",
-  "• Gestionar entornos Docker para servicios containerizados.",
-  "• Supervisar sistemas NAS (Synology y otras soluciones de almacenamiento empresarial).",
-  "• Asegurar copias de seguridad del sistema, redundancia e integridad de los datos.",
+    "Administrar y mantener servidores basados en Linux (gestión por CLI, actualizaciones, seguridad, monitorización).",
+    "Gestionar entornos Docker para servicios containerizados.",
+    "Supervisar sistemas NAS (Synology y otras soluciones de almacenamiento empresarial).",
+    "Asegurar copias de seguridad del sistema, redundancia e integridad de los datos.",
         "Sistemas Video-over-IP:",
-  "• Desplegar y mantener soluciones Video over IP (VoIP / AV-over-IP).",
-  "• Optimizar configuraciones de red para transporte de vídeo en tiempo real (multicast, QoS, gestión de ancho de banda).",
-  "• Resolver problemas de latencia, sincronización y rendimiento de streaming.",
+    "Desplegar y mantener soluciones Video over IP (VoIP / AV-over-IP).",
+    "Optimizar configuraciones de red para transporte de vídeo en tiempo real (multicast, QoS, gestión de ancho de banda).",
+    "Resolver problemas de latencia, sincronización y rendimiento de streaming.",
         "Sistemas de Automatización y Control:",
-  "• Integrar y gestionar plataformas de automatización como KNX, Crestron u otras similares.",
-  "• Configurar flujos de control AV para una automatización fluida de salas y sistemas.",
+    "Integrar y gestionar plataformas de automatización como KNX, Crestron u otras similares.",
+    "Configurar flujos de control AV para una automatización fluida de salas y sistemas.",
         "Redes y Seguridad:",
-  "• Mantener redes seguras y de alta disponibilidad para sistemas de vídeo e IT.",
-  "• Gestionar VLANs, firewalls y VPNs para soportar entornos AV e IT."
+    "Mantener redes seguras y de alta disponibilidad para sistemas de vídeo e IT.",
+    "Gestionar VLANs, firewalls y VPNs para soportar entornos AV e IT."
       ]
     },
     {
