@@ -18,17 +18,19 @@ function Profile({ data, language }: ProfileProps) {
     return lines.map((line, idx) => {
       const trimmed = line.trim();
       if (!trimmed) return null;
-      if (isTitleLine(trimmed) || /:$/.test(trimmed)) {
+      // remove any leading bullet characters that might be present in the JSON
+  const sanitized = trimmed.replace(/^[\s*\-•·]+/, '');
+      if (isTitleLine(sanitized) || /:$/.test(sanitized)) {
         // render as a small header without a bullet
         return (
-          <h5 key={idx} className="text-sm font-semibold text-navy-800 mt-3 mb-1">{trimmed.replace(/:$/, '')}</h5>
+          <h5 key={idx} className="text-sm font-semibold text-navy-800 mt-3 mb-1">{sanitized.replace(/:$/, '')}</h5>
         );
       }
       // render as a single bullet item
       return (
         <div key={idx} className="flex items-start gap-3 mt-1">
           <span className="text-navy-600 mt-1">•</span>
-          <p className="text-gray-700 leading-relaxed text-base">{trimmed}</p>
+          <p className="text-gray-700 leading-relaxed text-base">{sanitized}</p>
         </div>
       );
     });
