@@ -24,7 +24,7 @@
   "experience": [
     {
       "company": "EY (Ernest & Young)",
-  "role": "Senior AV Designer/Engineer | EMEIA FSO EY wavespace™",
+  "role": "Senior Infrastructure Engineer | EMEIA FSO EY wavespace™",
       "location": "Madrid, Spain",
       "date": "October 2025 – Present",
       "description": [
@@ -38,7 +38,7 @@
     "Optimize network configurations for real-time video transport (multicast, QoS, bandwidth management).",
     "Troubleshoot latency, synchronization, and streaming performance issues.",
         "Automation & Control Systems:",
-    "Integrate and manage KNX, Crestron, or similar automation platforms.",
+    "Integrate and manage KNX, Crestron, or similar automation platforms with Python/FastAPI.",
     "Configure AV control workflows for seamless room and system automation.",
         "Networking & Security:",
     "Maintain secure, high-availability networks for video and IT systems.",
