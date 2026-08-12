@@ -68,7 +68,9 @@ function Projects({ language }: ProjectsProps) {
                       {project.openGraphImageUrl ? (
                         <img 
                           src={project.openGraphImageUrl} 
-                          alt={project.name} 
+                          alt={project.name}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover"
                         />
                       ) : (

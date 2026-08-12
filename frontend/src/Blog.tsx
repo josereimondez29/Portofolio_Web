@@ -121,6 +121,7 @@ const Blog = ({ language }: BlogProps): React.ReactElement => {
                             src={post.coverImage.url} 
                             alt={post.title}
                             loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover"
                           />
                         </div>

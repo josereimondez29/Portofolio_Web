@@ -1,5 +1,5 @@
 import React from 'react';
-import profileImage from './assets/images/Foto de perfil new.jpg';
+import profileImage from './assets/images/Foto de perfil new.png';
 import type { CVData } from './types/CVData';
 
 interface ProfileProps {
@@ -70,6 +70,8 @@ function Profile({ data, language }: ProfileProps) {
                   src={profileImage} 
                   alt={data.name}
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="flex-1 text-left">
