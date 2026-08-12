@@ -21,8 +21,8 @@ export default defineConfig({
     },
     // Target modern browsers for smaller output
     target: 'esnext',
-    // Enable minification
-    minify: 'terser',
+    // Enable minification with esbuild (included with Vite)
+    minify: 'esbuild',
     // Increase chunk size warning to 1MB (since we're optimizing)
     chunkSizeWarningLimit: 1000,
     // CSS code splitting
