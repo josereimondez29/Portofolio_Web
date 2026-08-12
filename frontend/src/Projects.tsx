@@ -51,8 +51,8 @@ function Projects({ language }: ProjectsProps) {
       color: 'from-blue-500 to-blue-600'
     },
     {
-      title: 'GB Automations App',
-      description: language === 'es' ? 'Aplicación de automatización y gestión' : 'Automation and management application',
+      title: 'AutoBI - Analytics Agent as a Service',
+      description: language === 'es' ? 'Plataforma de análisis inteligente y agentes de IA' : 'Intelligent analytics platform and AI agents',
       url: 'https://app.gbautomations.com',
       color: 'from-purple-500 to-purple-600'
     }
