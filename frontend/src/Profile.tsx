@@ -87,11 +87,7 @@ function Profile({ data, language }: ProfileProps) {
                     {data.contact.email}
                   </p>
                   <p className="flex items-center gap-2 text-gray-700">
-                    <span className="w-5 text-navy-600">📱</span>
-                    {data.contact.phone}
-                  </p>
-                  <p className="flex items-center gap-2 text-gray-700">
-                    <span className="w-5 text-navy-600">📍</span>
+                    <span className="w-5 text-navy-600"></span>
                     {data.contact.location}
                   </p>
                   <div className="mt-4 flex gap-3">

@@ -60,30 +60,6 @@ const Layout = ({ children, language, setLanguage, data }: LayoutProps) => {
                       {language === 'es' ? 'Proyectos' : 'Projects'}
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      to="/blog"
-                      className={`px-3 py-2 rounded-md text-sm font-medium ${
-                        location.pathname.startsWith('/blog')
-                          ? 'bg-navy-100 text-navy-800'
-                          : 'text-navy-600 hover:bg-navy-50'
-                      }`}
-                    >
-                      Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/contact"
-                      className={`px-3 py-2 rounded-md text-sm font-medium ${
-                        location.pathname === '/contact'
-                          ? 'bg-navy-100 text-navy-800'
-                          : 'text-navy-600 hover:bg-navy-50'
-                      }`}
-                    >
-                      {language === 'es' ? 'Contacto' : 'Contact'}
-                    </Link>
-                  </li>
                 </ul>
               </nav>
             </div>
@@ -194,20 +170,6 @@ const Layout = ({ children, language, setLanguage, data }: LayoutProps) => {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {language === 'es' ? 'Proyectos' : 'Projects'}
-                </Link>
-                <Link
-                  to="/blog"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-navy-600 hover:bg-navy-50"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Blog
-                </Link>
-                <Link
-                  to="/contact"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-navy-600 hover:bg-navy-50"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {language === 'es' ? 'Contacto' : 'Contact'}
                 </Link>
 
                 <div className="flex justify-center space-x-6 mt-4 pt-4 border-t border-gray-200">
