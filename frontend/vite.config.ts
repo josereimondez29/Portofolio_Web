@@ -9,4 +9,27 @@ export default defineConfig({
     strictPort: false,
   },
   base: '/',
+  build: {
+    // Optimize chunk splitting for better caching
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'react-router-dom'],
+          'markdown': ['react-markdown', 'rehype-raw', 'rehype-sanitize'],
+        }
+      }
+    },
+    // Target modern browsers for smaller output
+    target: 'esnext',
+    // Enable minification
+    minify: 'terser',
+    // Increase chunk size warning to 1MB (since we're optimizing)
+    chunkSizeWarningLimit: 1000,
+    // CSS code splitting
+    cssCodeSplit: true,
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
+  }
 })

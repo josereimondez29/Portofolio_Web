@@ -37,11 +37,14 @@ function App() {
 
   useEffect(() => {
     let isMounted = true;
+    const abortController = new AbortController();
 
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`https://josereimondez-portfolio-backend.onrender.com/api/${language}`);
+        const response = await fetch(`https://josereimondez-portfolio-backend.onrender.com/api/${language}`, {
+          signal: abortController.signal,
+        });
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -54,7 +57,9 @@ function App() {
           setLoading(false);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        if (error instanceof Error && error.name !== 'AbortError') {
+          console.error('Error fetching data:', error);
+        }
         if (isMounted) {
           setLoading(false);
         }
@@ -65,6 +70,7 @@ function App() {
     
     return () => {
       isMounted = false;
+      abortController.abort();
     };
   }, [language]);
 
