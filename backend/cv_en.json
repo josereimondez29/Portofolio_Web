@@ -2,13 +2,12 @@
   "name": "JOSÉ REIMONDEZ",
   "title": "Python Developer & Data Scientist",
   "contact": {
-    "phone": "+34 624 604 647",
     "email": "josereimondez29@gmail.com",
     "linkedin": "https://linkedin.com/in/josereimondez",
     "github": "https://github.com/josereimondez29",
     "credly": "https://www.credly.com/users/jose-reimondez",
-    "portfolio": "https://josereimondez.com",
-    "location": "Madrid, Spain"
+    "project": "https://gbautomations.com",
+    "location": "Panama, Panama Republic"
   },
   "profile": "Python Developer with extensive experience in software development, process automation, and data analysis. Expert in frameworks such as Flask, Django, and FastAPI for building RESTful APIs, as well as data science tools like Pandas, NumPy, PySpark, Kafka, and machine learning libraries. Strong knowledge of containerization, CI/CD, and cloud deployment. Background in backend and full stack development, with a results-driven mindset and system optimization through automation and data-based solutions. Excellent leadership and communication skills.",
   "skills": {
